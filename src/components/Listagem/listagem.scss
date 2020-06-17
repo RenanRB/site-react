@@ -1,0 +1,32 @@
+
+.img-produto {
+    width: 180px;
+    height: 180px;
+    margin-top: 16px;
+    border-radius: 4px;
+}
+
+.conteudo {
+    padding: 16px;
+    width: calc(100% - 180px);
+    color: #333333;
+
+    .valor {
+        font-size: 24px;
+
+        img {
+            height: 18px;
+            margin-bottom: 4px;
+        }
+    }
+
+    .descricao {
+        font-size: 18px;
+        padding-top: 32px;
+    }
+}
+
+.localizacao {
+    font-size: 12px;
+    color: #999999;
+}

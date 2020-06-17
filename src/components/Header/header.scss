@@ -1,0 +1,15 @@
+header {
+    height: 60px;
+    width: 100%;
+    background-color: #FFE600;
+
+    input {
+        height: 36px;
+        width: calc(100% - 36px);
+    }
+
+    button {
+        height: 36px;
+        width: 36px;
+    }
+}
