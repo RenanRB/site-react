@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import queryString from 'query-string';
 import ItemLista from '../../components/ItemLista';
 import Header from '../../components/Header';
 import Localizacao from '../../components/Localizacao';
@@ -12,11 +13,19 @@ export default class ListaPage extends Component {
   }
 
   async componentDidMount() {
-    let search = this.props.location.search.split('=')[1];
+    const {search} = queryString.parse(this.props.location.search)
+    this.buscarRegistros(search);
+  }
+
+  async buscarRegistros(search) {
     const response = await api.get('/api/items?q=' + search);
     if (response?.data?.itens) {
-      this.setState({produtos: response.data.itens})
+      this.setState({produtos: response.data.itens});
     }
+  }
+
+  onChildChanged(search) {
+    this.buscarRegistros(search);
   }
 
   render() {
@@ -24,7 +33,7 @@ export default class ListaPage extends Component {
     const {produtos} = this.state;
     return (
       <Fragment>
-        <Header />
+        <Header callbackParent={(search) => this.onChildChanged(search)} />
         <Localizacao />
         <div className="container">
           <div className="row">

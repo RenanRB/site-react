@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import {withRouter} from 'react-router-dom'
 import './header.scss';
 
@@ -8,9 +9,11 @@ class Header extends Component {
     event.preventDefault();
     const inputBusca = event.target.busca;
     this.props.history.push(`/items?search=${inputBusca.value}`);
+    this.props.callbackParent(inputBusca.value);
   }
 
   render() {
+    const {search} = queryString.parse(this.props.location.search);
     return (
       <header className="absolut-top">
         <div className="container">
@@ -20,7 +23,7 @@ class Header extends Component {
             </div>
             <div className="col-md-11 mt-1">
               <form onSubmit={(event)=>{this.buscar(event)}} >
-                <input type="text" className="float-left border border-white rounded-left" name="busca" placeholder="Buscar produtos, marcas e muito mais..." />
+                <input type="text" className="float-left border border-white rounded-left" defaultValue={search || ''} name="busca" placeholder="Buscar produtos, marcas e muito mais..." />
                 <button type="submit" className="float-left rounded-right position-absolut border-0">
                   <img src="/assets/ic_Search.png" alt="Imagem de uma lupa para realizar a busca" />
                 </button>
